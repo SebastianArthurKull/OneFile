@@ -1,4 +1,4 @@
-# flatten-folder
+# OneFile
 
 *Flatten an entire source tree into **one** UTF‑8 text file – perfect for pasting into ChatGPT for code review, quick archiving, or sharing a snapshot of your code.*
 
