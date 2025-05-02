@@ -29,6 +29,14 @@ flattened_code.txt
 
 ---
 
+## 📦 Download the latest binaries
+
+| OS | File |
+|----|------|
+| Windows (.exe) | [flatten-folder‑windows.exe](https://github.com/SebastianArthurKull/OneFile/releases/latest/download/flatten-folder-windows.exe) |
+| macOS | [flatten-folder‑macos](https://github.com/SebastianArthurKull/OneFile/releases/latest/download/flatten-folder-macos) |
+| Linux | [flatten-folder‑linux](https://github.com/SebastianArthurKull/OneFile/releases/latest/download/flatten-folder-linux) |
+
 ## 🛠️ Build from source
 > **Prerequisite:** [Rust toolchain](https://rustup.rs) ≥ 1.70.
 
