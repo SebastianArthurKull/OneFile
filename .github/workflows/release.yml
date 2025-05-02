@@ -1,0 +1,74 @@
+# .github/workflows/release.yml
+name: Build and Release Binaries
+
+on:
+  push:
+    tags:
+      - 'v*'              # e.g. v1.2.3
+
+env:
+  BIN_NAME: OneFile   # <- adjust once here if you ever rename the crate
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          # matrix items let us attach per‑OS metadata (suffix + extension)
+          - os: ubuntu-latest
+            artifact_suffix: linux
+            ext: ""
+          - os: windows-latest
+            artifact_suffix: windows
+            ext: ".exe"
+          - os: macos-latest
+            artifact_suffix: macos
+            ext: ""
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash          # ensures POSIX tools (cp, mkdir, etc.) even on Windows
+
+    steps:
+      - uses: actions/checkout@v3
+
+      # one‑liner toolchain install + caching on every runner
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          toolchain: stable   # or pin e.g. 1.78.0
+
+      - name: Build release binary
+        run: cargo build --release --locked
+
+      - name: Copy & rename for this OS
+        run: |
+          mkdir -p dist
+          cp target/release/${BIN_NAME}${{ matrix.ext }} \
+             dist/${BIN_NAME}-${{ matrix.artifact_suffix }}${{ matrix.ext }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.BIN_NAME }}-${{ matrix.artifact_suffix }}
+          path: dist/*
+          retention-days: 1
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write        # required by action-gh-release
+
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+
+      - run: ls -R dist      # (optional) quick sanity‑check
+
+      - name: Create GitHub release & upload binaries
+        uses: softprops/action-gh-release@v1
+        with:
+          files: dist/**/*   # every file from every OS
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
