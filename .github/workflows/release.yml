@@ -7,7 +7,7 @@ on:
       - 'v*'              # e.g. v1.2.3
 
 env:
-  BIN_NAME: OneFile   # <- adjust once here if you ever rename the crate
+  BIN_NAME: onefile   # <- adjust once here if you ever rename the crate
 
 jobs:
   build:
