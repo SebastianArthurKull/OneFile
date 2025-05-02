@@ -33,9 +33,9 @@ flattened_code.txt
 
 | OS | File |
 |----|------|
-| Windows (.exe) | [flatten-folder‑windows.exe](https://github.com/SebastianArthurKull/OneFile/releases/latest/download/onefile-windows.exe) |
-| macOS | [flatten-folder‑macos](https://github.com/SebastianArthurKull/OneFile/releases/latest/download/onefile-macos) |
-| Linux | [flatten-folder‑linux](https://github.com/SebastianArthurKull/OneFile/releases/latest/download/onefile-linux) |
+| Windows (.exe) | [onefile‑windows.exe](https://github.com/SebastianArthurKull/OneFile/releases/latest/download/onefile-windows.exe) |
+| macOS | [onefile‑macos](https://github.com/SebastianArthurKull/OneFile/releases/latest/download/onefile-macos) |
+| Linux | [onefile‑linux](https://github.com/SebastianArthurKull/OneFile/releases/latest/download/onefile-linux) |
 
 ## 🛠️ Build from source
 > **Prerequisite:** [Rust toolchain](https://rustup.rs) ≥ 1.70.
