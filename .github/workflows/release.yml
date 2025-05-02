@@ -38,7 +38,7 @@ jobs:
           toolchain: stable   # or pin e.g. 1.78.0
 
       - name: Build release binary
-        run: cargo build --release --locked
+        run: cargo build --release
 
       - name: Copy & rename for this OS
         run: |
