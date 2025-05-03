@@ -1,20 +1,18 @@
-# .github/workflows/release.yml
 name: Build and Release Binaries
 
 on:
   push:
     tags:
-      - 'v*'              # e.g. v1.2.3
+      - 'v*'           
 
 env:
-  BIN_NAME: OneFile   # <- adjust once here if you ever rename the crate
+  BIN_NAME: OneFile   # this should be read from Cargo.toml. Will adjust this when i have time.
 
 jobs:
   build:
     strategy:
       matrix:
         include:
-          # matrix items let us attach per‑OS metadata (suffix + extension)
           - os: ubuntu-latest
             artifact_suffix: linux
             ext: ""
@@ -27,7 +25,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     defaults:
       run:
-        shell: bash          # ensures POSIX tools (cp, mkdir, etc.) even on Windows
+        shell: bash          # ensures POSIX tools (cp, mkdir, etc.) even on Windows. Best lesson learned while writting actions.
 
     steps:
       - uses: actions/checkout@v3
@@ -35,7 +33,7 @@ jobs:
       # one‑liner toolchain install + caching on every runner
       - uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
-          toolchain: stable   # or pin e.g. 1.78.0
+          toolchain: stable 
 
       - name: Build release binary
         run: cargo build --release
@@ -64,11 +62,11 @@ jobs:
         with:
           path: dist
 
-      - run: ls -R dist      # (optional) quick sanity‑check
+      - run: ls -R dist
 
       - name: Create GitHub release & upload binaries
         uses: softprops/action-gh-release@v1
         with:
-          files: dist/**/*   # every file from every OS
+          files: dist/**/
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
