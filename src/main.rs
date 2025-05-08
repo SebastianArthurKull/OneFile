@@ -3,7 +3,6 @@ use std::{
     io::{self, BufRead, BufReader, BufWriter, Read, Write},
     path::{Path, PathBuf},
 };
-
 use anyhow::{Context, Result};
 use clap::{ArgAction, Parser};
 use ignore::WalkBuilder;
@@ -46,6 +45,7 @@ struct Cli {
 
 fn main() -> Result<()> {
     let cli = Cli::parse();
+    
     if !cli.folder.is_dir() {
         anyhow::bail!("‘{}’ is not a directory", cli.folder.display());
     }
@@ -58,6 +58,8 @@ fn main() -> Result<()> {
             cli.include_binary
         );
     }
+    
+
 
     let mut writer = BufWriter::new(
         File::create(&cli.output)

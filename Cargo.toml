@@ -1,8 +1,8 @@
 [package]
-name        = "flatten-folder"
+name        = "onefile"
 version     = "1.0.0"
 edition     = "2024"
-authors     = ["Your Name sebastian.arthur.kull@gmail.com>"]
+authors     = ["Sebastian Kull sebastian.arthur.kull@gmail.com>"]
 description = "Flatten a folder tree into one text file – handy for ChatGPT code review."
 
 [dependencies]
